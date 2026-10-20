@@ -4,96 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ilaria & Francesca · 3 Settembre 2027</title>
-
-  <!-- Font Google: DM Sans in tre pesi -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap">
-
   <style>
-    /* Azzera margin e padding su tutti gli elementi */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Pagina: sfondo beige, contenuto centrato orizzontalmente, parte dall'alto */
     body {
       min-height: 100vh;
-      background: #F8F7F3;
+      background: #2B1A1A;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 0px 0px 48px; /* 0 sopra, 16px ai lati, 48px sotto */
-      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-family: -apple-system, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Contenitore centrale, max 460px di larghezza */
     .card {
       width: 100%;
-      max-width: 460px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      max-width: 480px;
     }
 
-    /* Box immagine: position relative serve per ancorare il bottone dentro */
+    /* Box immagine: position relative per ancorare il link overlay */
     .img-box {
       position: relative;
       width: 100%;
-      border-radius: 3px;
-      overflow: hidden; /* nasconde gli angoli arrotondati sull'immagine */
-      line-height: 0;   /* elimina lo spazio bianco sotto l'img */
+      line-height: 0;
     }
 
-    /* Su schermi piccoli (telefono): tolgo i margini laterali e gli angoli arrotondati */
-    @media (max-width: 500px) {
-      body {
-        padding: 0 0 0;
-      }
-      .card {
-        max-width: 100%;
-      }
-      .img-box {
-        border-radius: 0;
-      }
-    }
-
-    /* Immagine: occupa tutta la larghezza del box */
     .img-box img {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    /* Bottone sovrapposto all'immagine, centrato orizzontalmente */
-    .cal-btn {
-      position: absolute;      /* si posiziona rispetto a .img-box */
-      bottom: 18%;           /* distanza dal basso dell'immagine — cambia questo per spostarlo */
+    /* Link invisibile sovrapposto al bottone "SEGNA LA DATA" nel design */
+    .cal-link {
+      position: absolute;
+      /* Bottone nel design: ~93.8% dall'alto, alto ~3.5%, larghezza ~42% centrata */
+      top: 93.8%;
       left: 50%;
-      transform: translateX(-50%); /* trucco per centrarlo esattamente */
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;                /* spazio tra icona e testo */
-      padding: 15px 36px;
-      background: #1B1917;    /* nero quasi totale */
-      color: #F8F7F3;          /* bianco sporco */
-      text-decoration: none;
-      border-radius: 3px;
-      font-family: 'DM Sans', -apple-system, sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      white-space: nowrap;     /* evita che il testo vada a capo */
-      transition: opacity 0.15s;
+      transform: translateX(-50%);
+      width: 42%;
+      height: 3.5%;
+      border-radius: 50px;   /* segue la forma arrotondata del bottone */
+      cursor: pointer;
+      /* outline visibile solo per debug — togliere in produzione */
+      /* outline: 2px solid red; */
     }
 
-    /* Hover: diventa leggermente trasparente */
-    .cal-btn:hover { opacity: 0.78; }
-
-    /* Icona calendario SVG */
-    .cal-btn svg {
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0; /* non si restringe mai */
+    @media (max-width: 500px) {
+      .card { max-width: 100%; }
     }
   </style>
 </head>
@@ -101,22 +60,10 @@
 
   <div class="card">
     <div class="img-box">
-
-      <!-- IMMAGINE: rinomina il tuo file "immagine.jpg" e mettilo nella stessa cartella -->
       <img src="immagine.jpg" alt="Save the Date – Ilaria &amp; Francesca">
 
-      <!-- BOTTONE: apre matrimonio.ics — su iPhone Apple Calendar, su Android Google Calendar -->
-      <a class="cal-btn" href="matrimonio.ics">
-        <!-- Icona calendario (SVG inline, non serve file esterno) -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="4" width="18" height="18" rx="2"/>
-          <line x1="16" y1="2" x2="16" y2="6"/>
-          <line x1="8"  y1="2" x2="8"  y2="6"/>
-          <line x1="3"  y1="10" x2="21" y2="10"/>
-        </svg>
-        Save the Date
-      </a>
-
+      <!-- Link trasparente sovrapposto al bottone "SEGNA LA DATA" nel grafico -->
+      <a class="cal-link" href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
     </div>
   </div>
 
