@@ -13,14 +13,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       font-family: -apple-system, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Desktop: card larga fino a 960px per contenere l'immagine orizzontale */
     .card {
       width: 100%;
-      max-width: 480px;
+      max-width: 960px;
     }
 
     .img-box {
@@ -35,50 +36,49 @@
       display: block;
     }
 
-    /* Nasconde l'immagine mobile di default (desktop) */
-    .mobile  { display: none; }
-    .desktop { display: block; }
+    /* Default: mostra desktop, nasconde mobile */
+    .img-mobile        { display: none; }
+    .img-desktop       { display: block; }
+    .cal-link-mobile   { display: none; }
+    .cal-link-desktop  { display: block; }
 
-    /* Su cellulare: mostra mobile, nasconde desktop */
+    /* Su cellulare: scambia */
     @media (max-width: 600px) {
-      .desktop { display: none; }
-      .mobile  { display: block; }
-      .card { max-width: 100%; }
+      .card              { max-width: 100%; }
+      .img-desktop       { display: none; }
+      .img-mobile        { display: block; }
+      .cal-link-desktop  { display: none; }
+      .cal-link-mobile   { display: block; }
     }
 
-    /* Link invisibile sopra il bottone — versione DESKTOP */
-    .cal-link-desktop {
-      position: absolute;
-      top: 92.5%;       /* ← aggiusta questo se il bottone non è centrato su pc */
-      left: 50%;
-      transform: translateX(-50%);
-      width: 48%;
-      height: 4.2%;
-      border-radius: 50px;
-      cursor: pointer;
-      outline: 2px solid red;
-    }
-
-    /* Link invisibile sopra il bottone — versione MOBILE */
+    /* Link invisibile — base condivisa */
+    .cal-link-desktop,
     .cal-link-mobile {
       position: absolute;
-      top: 90.5%;       /* ← aggiusta questo se il bottone non è centrato su cell */
+      border-radius: 50px;
+      cursor: pointer;
+      /* Togli il commento sotto per debug (vedi il rettangolo rosso) */
+      /* outline: 2px solid red; */
+    }
+
+    /* Bottone nel layout DESKTOP (immagine orizzontale):
+       pannello destro, in basso al centro del pannello */
+    .cal-link-desktop {
+      top: 83%;
+      left: 75%;
+      transform: translateX(-50%);
+      width: 24%;
+      height: 10%;
+    }
+
+    /* Bottone nel layout MOBILE (immagine verticale):
+       centrato, quasi in fondo */
+    .cal-link-mobile {
+      top: 92.5%;
       left: 50%;
       transform: translateX(-50%);
       width: 48%;
       height: 4.2%;
-      border-radius: 50px;
-      cursor: pointer;
-      outline: 2px solid red;
-    }
-
-    /* Mostra/nasconde i link insieme alle immagini */
-    .cal-link-mobile  { display: none; }
-    .cal-link-desktop { display: block; }
-
-    @media (max-width: 600px) {
-      .cal-link-desktop { display: none; }
-      .cal-link-mobile  { display: block; }
     }
   </style>
 </head>
@@ -87,17 +87,11 @@
   <div class="card">
     <div class="img-box">
 
-      <!-- Immagine per PC (orizzontale o quadrata) -->
-      <img class="desktop" src="immagine-desktop.jpg" alt="Save the Date – Ilaria &amp; Francesca">
+      <img class="img-desktop" src="immagine-desktop.jpg" alt="Save the Date – Ilaria &amp; Francesca">
+      <img class="img-mobile"  src="immagine-mobile.jpg"  alt="Save the Date – Ilaria &amp; Francesca">
 
-      <!-- Immagine per cellulare (verticale) -->
-      <img class="mobile" src="immagine-mobile.jpg" alt="Save the Date – Ilaria &amp; Francesca">
-
-      <!-- Link calendario per PC -->
       <a class="cal-link-desktop" href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
-
-      <!-- Link calendario per cellulare -->
-      <a class="cal-link-mobile" href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
+      <a class="cal-link-mobile"  href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
 
     </div>
   </div>
