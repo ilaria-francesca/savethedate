@@ -9,7 +9,7 @@
 
     body {
       min-height: 100vh;
-      background: #fbd1dd;
+      background: #2B1A1A;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -23,7 +23,6 @@
       max-width: 480px;
     }
 
-    /* Box immagine: position relative per ancorare il link overlay */
     .img-box {
       position: relative;
       width: 100%;
@@ -36,23 +35,48 @@
       display: block;
     }
 
-    /* Link invisibile sovrapposto al bottone "SEGNA LA DATA" nel design */
-    .cal-link {
-      position: absolute;
-      /* Bottone nel design: ~93.8% dall'alto, alto ~3.5%, larghezza ~42% centrata */
-      top: 90.5%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 42%;
-      height: 4%;
-      border-radius: 50px;   /* segue la forma arrotondata del bottone */
-      cursor: pointer;
-      /* outline visibile solo per debug — togliere in produzione */
-      /* outline: 2px solid red; */
+    /* Nasconde l'immagine mobile di default (desktop) */
+    .mobile  { display: none; }
+    .desktop { display: block; }
+
+    /* Su cellulare: mostra mobile, nasconde desktop */
+    @media (max-width: 600px) {
+      .desktop { display: none; }
+      .mobile  { display: block; }
+      .card { max-width: 100%; }
     }
 
-    @media (max-width: 500px) {
-      .card { max-width: 100%; }
+    /* Link invisibile sopra il bottone — versione DESKTOP */
+    .cal-link-desktop {
+      position: absolute;
+      top: 92.5%;       /* ← aggiusta questo se il bottone non è centrato su pc */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48%;
+      height: 4.2%;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    /* Link invisibile sopra il bottone — versione MOBILE */
+    .cal-link-mobile {
+      position: absolute;
+      top: 92.5%;       /* ← aggiusta questo se il bottone non è centrato su cell */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48%;
+      height: 4.2%;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    /* Mostra/nasconde i link insieme alle immagini */
+    .cal-link-mobile  { display: none; }
+    .cal-link-desktop { display: block; }
+
+    @media (max-width: 600px) {
+      .cal-link-desktop { display: none; }
+      .cal-link-mobile  { display: block; }
     }
   </style>
 </head>
@@ -60,10 +84,19 @@
 
   <div class="card">
     <div class="img-box">
-      <img src="immagine.jpg" alt="Save the Date – Ilaria &amp; Francesca">
 
-      <!-- Link trasparente sovrapposto al bottone "SEGNA LA DATA" nel grafico -->
-      <a class="cal-link" href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
+      <!-- Immagine per PC (orizzontale o quadrata) -->
+      <img class="desktop" src="immagine-desktop.jpg" alt="Save the Date – Ilaria &amp; Francesca">
+
+      <!-- Immagine per cellulare (verticale) -->
+      <img class="mobile" src="immagine-mobile.jpg" alt="Save the Date – Ilaria &amp; Francesca">
+
+      <!-- Link calendario per PC -->
+      <a class="cal-link-desktop" href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
+
+      <!-- Link calendario per cellulare -->
+      <a class="cal-link-mobile" href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
+
     </div>
   </div>
 
