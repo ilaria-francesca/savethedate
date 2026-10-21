@@ -11,14 +11,11 @@
       min-height: 100vh;
       background: #fbd1dd;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       font-family: -apple-system, sans-serif;
-      -webkit-font-smoothing: antialiased;
     }
 
-    /* Desktop: card larga fino a 960px per contenere l'immagine orizzontale */
     .card {
       width: 100%;
       max-width: 960px;
@@ -36,49 +33,34 @@
       display: block;
     }
 
-    /* Default: mostra desktop, nasconde mobile */
-    .img-mobile        { display: none; }
-    .img-desktop       { display: block; }
-    .cal-link-mobile   { display: none; }
-    .cal-link-desktop  { display: block; }
-
-    /* Su cellulare: scambia */
-    @media (max-width: 600px) {
-      .card              { max-width: 100%; }
-      .img-desktop       { display: none; }
-      .img-mobile        { display: block; }
-      .cal-link-desktop  { display: none; }
-      .cal-link-mobile   { display: block; }
-    }
-
-    /* Link invisibile — base condivisa */
-    .cal-link-desktop,
-    .cal-link-mobile {
+    /* Link invisibile sopra il bottone */
+    .cal-link {
       position: absolute;
       border-radius: 50px;
       cursor: pointer;
-      /* Togli il commento sotto per debug (vedi il rettangolo rosso) */
-      outline: 2px solid red;
-    }
+      /* outline: 2px solid red; */ /* ← togli il commento per debug */
 
-    /* Bottone nel layout DESKTOP (immagine orizzontale):
-       pannello destro, in basso al centro del pannello */
-    .cal-link-desktop {
-      top: 83%;
-      left: 75%;
-      transform: translateX(-50%);
-      width: 24%;
-      height: 10%;
-    }
-
-    /* Bottone nel layout MOBILE (immagine verticale):
-       centrato, quasi in fondo */
-    .cal-link-mobile {
-      top: 90.5%;
+      /* Posizione di default: MOBILE (immagine verticale) */
+      top: 92.5%;
       left: 50%;
       transform: translateX(-50%);
       width: 48%;
       height: 4.2%;
+    }
+
+    /* Su PC (immagine orizzontale): bottone in basso nel pannello destro */
+    @media (min-width: 601px) {
+      .card { max-width: 960px; }
+      .cal-link {
+        top: 83%;
+        left: 75%;
+        width: 24%;
+        height: 10%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .card { max-width: 100%; }
     }
   </style>
 </head>
@@ -87,11 +69,13 @@
   <div class="card">
     <div class="img-box">
 
-      <img class="img-desktop" src="immagine-desktop.jpg" alt="Save the Date – Ilaria &amp; Francesca">
-      <img class="img-mobile"  src="immagine-mobile.jpg"  alt="Save the Date – Ilaria &amp; Francesca">
+      <!-- <picture> mostra automaticamente l'immagine giusta senza CSS -->
+      <picture>
+        <source media="(min-width: 601px)" srcset="immagine-desktop.jpg">
+        <img src="immagine-mobile.jpg" alt="Save the Date – Ilaria &amp; Francesca">
+      </picture>
 
-      <a class="cal-link-desktop" href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
-      <a class="cal-link-mobile"  href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
+      <a class="cal-link" href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
 
     </div>
   </div>
