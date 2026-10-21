@@ -16,9 +16,15 @@
       font-family: -apple-system, sans-serif;
     }
 
+    /* Desktop: immagine orizzontale a tutta larghezza */
     .card {
       width: 100%;
-      max-width: 1400px;
+      max-width: 100%;
+    }
+
+    /* Mobile: limita a larghezza schermo */
+    @media (max-width: 600px) {
+      .card { max-width: 100%; }
     }
 
     .img-box {
@@ -38,30 +44,23 @@
       position: absolute;
       border-radius: 50px;
       cursor: pointer;
-      outline: 2px solid red; /* ← togli il commento per debug */
 
-      /* Posizione di default: MOBILE (immagine verticale) */
+      /* MOBILE — immagine verticale */
       top: 90.5%;
       left: 50%;
       transform: translateX(-50%);
       width: 48%;
-      height: 4.2%;
+      height: 4%;
     }
 
-    /* Su PC (immagine orizzontale): bottone in basso nel pannello destro */
+    /* DESKTOP — immagine orizzontale: bottone in basso nel pannello destro */
     @media (min-width: 601px) {
-      .card { max-width: 1400px; }
       .cal-link {
-        top: 83%;
+        top: 82%;
         left: 75%;
-        width: 24%;
-        height: 10%;
-        outline: 2px solid red; /* ← togli il commento per debug */
+        width: 20%;
+        height: 9%;
       }
-    }
-
-    @media (max-width: 600px) {
-      .card { max-width: 100%; }
     }
   </style>
 </head>
@@ -69,15 +68,12 @@
 
   <div class="card">
     <div class="img-box">
-
-      <!-- <picture> mostra automaticamente l'immagine giusta senza CSS -->
       <picture>
         <source media="(min-width: 601px)" srcset="immagine-desktop.jpg">
         <img src="immagine-mobile.jpg" alt="Save the Date – Ilaria &amp; Francesca">
       </picture>
 
       <a class="cal-link" href="matrimonio.ics" aria-label="Segna la data nel calendario"></a>
-
     </div>
   </div>
 
